@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rick_morty_app/personagem_controller.dart';
 import 'package:rick_morty_app/screens/tela_principal.dart';
 import 'package:rick_morty_app/themes/temas.dart';
 
@@ -12,12 +13,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    final personagemController = Get.put(PersonagemController());
+    return Obx(() => GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Rick and Morty App',
-      theme: lightTheme,
-      darkTheme: darkTheme,
+      theme: personagemController.isDarkTheme.value ? darkTheme : lightTheme,
       home: TelaPrincipal(),
+    ),
     );
   }
 }
